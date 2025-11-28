@@ -2,9 +2,9 @@
     <a routerLink="/">Shop</a>
     <div class="header-actions">
         @if (!isEmpty()) {
-            <a routerLink="/cart" class="cart-link">
-                Cart: {{ cartItemCount() }} items - {{ totalPrice() | currency }}
-            </a>
+            <button (click)="openCart()" class="cart-button">
+                {{ cartItemCount() }} items - {{ totalPrice() | currency }}
+            </button>
         } 
         <button class="auth-button" routerLink="/checkout">Checkout</button>
         @if (isLoggedIn()) {

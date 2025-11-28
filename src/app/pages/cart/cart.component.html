@@ -1,0 +1,17 @@
+@if (isEmpty()) {
+    <p>Your cart is empty.</p>
+} @else {
+    <ul class="cart-list">
+        @for (item of cartItems(); track item.product.id) {
+            <li class="cart-item">
+                <div class="info">
+                <strong>{{item.product.title}}</strong>
+                <span>Quantity: {{item.quantity}}</span>
+                </div>
+                <span class="price">{{ item.product.price * item.quantity | currency }}</span>
+                <button (click)="removeItem(item.product.id)">Remove</button>
+            </li>
+        }
+    </ul>
+    <p class="total">Total: {{ cartTotal() | currency }}</p>
+}
