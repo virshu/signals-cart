@@ -6,7 +6,9 @@
                 Cart: {{ cartItemCount() }} items - {{ totalPrice() | currency }}
             </a>
         } 
+        <button class="auth-button" routerLink="/checkout">Checkout</button>
         @if (isLoggedIn()) {
+            <span class="user-info">Welcome, {{username()}}!</span>
             <button class="auth-button" (click)="logout()">Logout</button>
         } @else {
             <button class="auth-button" routerLink="/login">Login</button>
