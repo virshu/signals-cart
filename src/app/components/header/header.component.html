@@ -1,6 +1,15 @@
 <header class="header">
     <a routerLink="/">Shop</a>
     <div class="header-actions">
-        {{ cartItemCount() }} items - {{ totalPrice() | currency }}
+        @if (!isEmpty()) {
+            <a routerLink="/cart" class="cart-link">
+                Cart: {{ cartItemCount() }} items - {{ totalPrice() | currency }}
+            </a>
+        } 
+        @if (isLoggedIn()) {
+            <button class="auth-button" (click)="logout()">Logout</button>
+        } @else {
+            <button class="auth-button" routerLink="/login">Login</button>
+        }
     </div>
 </header>

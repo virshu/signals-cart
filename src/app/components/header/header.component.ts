@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CartService } from '../../services/cart.service';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { CurrencyPipe } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,19 @@ import { CurrencyPipe } from '@angular/common';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  private readonly cartService = inject(CartService);
-  readonly cartItemCount = this.cartService.totalItems;
-  readonly totalPrice = this.cartService.totalPrice;
+  #cart = inject(CartService);
+  #auth = inject(AuthService);
+  #router = inject(Router);
+
+  readonly cartItemCount = this.#cart.totalItems;
+  readonly totalPrice = this.#cart.totalPrice;
+  readonly isEmpty = this.#cart.isEmpty;
+
+  readonly isLoggedIn = this.#auth.isLoggedIn;
+  readonly username = this.#auth.username;
+
+  logout() {
+    this.#auth.logout();
+    this.#router.navigateByUrl('/');
+  }
 }
