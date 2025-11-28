@@ -5,8 +5,5 @@
 } @else if (!products() || products()?.length === 0) {
     <p>No products available.</p>
 } @else {
-    <h2>Product List {{ products()?.length }}</h2>
-    <p>Total Items in Cart: {{ count() }}</p>
-
     <app-product-list [products]="products()"></app-product-list>
 }
