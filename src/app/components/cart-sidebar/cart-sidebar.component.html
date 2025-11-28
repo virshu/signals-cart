@@ -1,12 +1,12 @@
 <div class="sidebar">
     <div class="sidebar-header">
-        <h2>Your Cart</h2>
+        <h3>Your Cart</h3>
         <button (click)="closeSidebar()">X</button>
     </div>
     <app-cart />
     <div class="sidebar-footer">
         <a routerLink="checkout" (click)="closeSidebar()" class="checkout-link" [class.disabled]="isEmpty()">
-            Go to Checkout
+            Go to Checkout →
         </a>
     </div>
 </div>
