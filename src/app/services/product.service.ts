@@ -1,30 +1,24 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, effect, Injectable, signal } from '@angular/core';
 import { Product } from '../models/product';
+import { httpResource } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  #products = signal<Product[]>([]);
-  #loading = signal<boolean>(false);
+  readonly resource = httpResource<Product[]>(() => 'https://fakestoreapi.com/products');
+  readonly products = this.resource.value;
+  readonly loading = this.resource.isLoading;
+  readonly error = this.resource.error;
 
-  readonly products = this.#products.asReadonly();
-  readonly loading = this.#loading.asReadonly();
-  readonly count = computed(() => this.#products().length);
+  readonly count = computed(() => this.products()?.length ?? 0);
 
   constructor() { 
-    this.#loading.set(true);
-    setTimeout(() => {
-      this.#products.set([
-        { id: '1', title: 'Product 1', price: 10 },
-        { id: '2', title: 'Product 2', price: 20 },
-        { id: '3', title: 'Product 3', price: 30 },
-      ]);
-      this.#loading.set(false);
-    }, 2000);
+    effect(() => {
+      if (this.error()) {
+        console.error('Error loading products:', this.error());
+      }
+    });
   }
 
-  setLoading(loading: boolean) {
-    this.#loading.set(loading);
-  }
 }

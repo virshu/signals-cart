@@ -1,13 +1,12 @@
-@if (loading()) {
-  <p>Loading products...</p>
+@if (error(); as error) {
+    <p>Error loading products: {{ error }}</p>
+} @else if (loading()) {
+  <div class="loader"></div>
+} @else if (!products() || products()?.length === 0) {
+    <p>No products available.</p>
 } @else {
-    <h2>Product List {{ products().length }}</h2>
+    <h2>Product List {{ products()?.length }}</h2>
     <p>Total Items in Cart: {{ count() }}</p>
 
-    @for (product of products(); track product.id) {
-      <div style="margin-bottom: 1rem;">
-        <strong>{{ product.title }}</strong> - {{ product.price | currency }}
-        <button (click)="addToCart(product.id)">Add to Cart</button>
-      </div>
-    }
+    <app-product-list [products]="products()"></app-product-list>
 }
