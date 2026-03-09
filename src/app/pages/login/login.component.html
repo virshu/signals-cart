@@ -2,11 +2,11 @@
 <form (submit)="login($event)">
 <div>
     <label for="username">Username:</label>
-    <input type="text" [field]="loginForm.username" />
+    <input type="text" [formField]="loginForm.username" />
 </div>
 <div>
     <label for="password">Password:</label>
-    <input type="password" [field]="loginForm.password" />
+    <input type="password" [formField]="loginForm.password" />
 </div>
 <button>Login</button>
 </form>

@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LoginRequest } from './login-request';
-import { form, Field } from '@angular/forms/signals';
+import { form,  FormField } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-login',
-  imports: [Field],
+  imports: [FormField],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

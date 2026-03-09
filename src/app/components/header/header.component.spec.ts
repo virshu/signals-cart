@@ -4,6 +4,7 @@ import { HeaderComponent } from './header.component';
 import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { LoginRequest } from '../../pages/login/login-request';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -36,7 +37,8 @@ describe('HeaderComponent', () => {
 
   it('should display total items from CartService signal', () => {
     const header = fixture.nativeElement as HTMLElement;
-    authService.login('testuser'); // simulate login
+    const testUser: LoginRequest = { username: 'testuser', password: 'password' };
+    authService.login(testUser); // simulate login
     fixture.detectChanges(); // update the view
     // Initial state: cart is empty
     expect(component.cartItemCount()).toBe(0);
